@@ -39,7 +39,7 @@ const LoginForm = ({onSubmit,onChange,errors,successMessage,user,toggleAuthentic
           <button className="btn btn-primary btn-block" type="submit">Log-In</button>
         </div>
 
-        <p>Don't have an account? <Link to={'/signup'} id="sign">Create&nbsp;one</Link>.</p>
+        <p>Don't have an account? <Link to={'/register'} id="sign">Create&nbsp;one</Link>.</p>
       </form>
     </div>
   </div>
