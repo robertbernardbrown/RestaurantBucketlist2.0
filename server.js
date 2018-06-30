@@ -28,6 +28,26 @@ if (process.env.JAWSDB_URL) {
   var sessionStore = new MySQLStore(options);
   console.log(sessionStore);
 }
+app.use(session({
+  secret: "8QEvskFKPTuZ5k5r7CKF",
+  resave: false,
+  store: sessionStore,
+  saveUninitialized: false,
+  // cookie: { secure: true }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//load Passport strategies
+const facebookTokenLoginStrategy = require("./server/passport/facebook-login");
+const localSignupStrategy = require('./server/passport/local-signup');
+const localLoginStrategy = require('./server/passport/local-login');
+passport.use('facebook-token', facebookTokenLoginStrategy);
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+app.use('/api', authCheckMiddleware);
+app.use(routes);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
